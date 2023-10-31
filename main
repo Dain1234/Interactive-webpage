@@ -1,0 +1,144 @@
+import React, {useState, useEffect} from 'react';
+import styled from 'styled-components';
+import ProductList from './ProductList';
+
+// Define a mock data array of products for testing purposes
+const mockData = [
+   {
+     id: "1",
+     image: "https://images.unsplash.com/photo-1543512214-318c7553f230?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bGFwdG9wfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+     title: "Laptop",
+     description: "A sleek and powerful laptop with high performance and long battery life.",
+     price: "999.99",
+     category: "Electronics"
+   },
+   {
+     id: "2",
+     image: "https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Ym9va3N8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+     title: "Books",
+     description: "A collection of books from various genres and authors.",
+     price: "49.99",
+     category: "Books"
+   },
+   {
+     id: "3",
+     image: "https://images.unsplash.com/photo-1511556820780-d912e42b4980?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y29mZmVlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+     title: "Coffee",
+     description: "A pack of premium coffee beans from the best regions in the world.",
+     price: "19.99",
+     category: "Food"
+   },
+   {
+     id: "4",
+     image: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGxhbnR8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+     title: "Plant",
+     description: "A beautiful and healthy plant that purifies the air and adds life to your space.",
+     price: "29.99",
+     category: "Home"
+   },
+   {
+     id: "5",
+     image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dHNoaXJ0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+     title: "T-shirt",
+     description: "A comfortable and stylish t-shirt made from organic cotton.",
+     price: "14.99",
+     category: "Clothing"
+   }
+];
+
+// Define a styled component for the app container
+const AppContainer = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+`;
+
+// Define a styled component for the app header
+const AppHeader = styled.h1`
+  text-align: center;
+  font-size: 32px;
+`;
+
+// Define a styled component for the app filters
+const AppFilters = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+`;
+
+// Define a styled component for the filter label
+const FilterLabel = styled.label`
+  margin-right: 10px;
+`;
+
+// Define a styled component for the filter select
+const FilterSelect = styled.select`
+  margin-bottom: 10px;
+`;
+
+// Define a React component that renders the main app
+const App = () => {
+
+   // Define a state variable for the products array
+   const [products, setProducts] = useState([]);
+
+   // Define a state variable for the filter value
+   const [filter, setFilter] = useState("All");
+
+   // Define a state variable for the sort value
+   const [sort, setSort] = useState("None");
+
+   // Define a state variable for the current page number
+   const [page, setPage] = useState(1);
+
+   // Define a constant for the number of products per page
+   const productsPerPage = 4;
+
+   // Define a useEffect hook to fetch the mock data when the component mounts
+   useEffect(() => {
+      // Simulate an API call using setTimeout
+      setTimeout(() => {
+         // Set the products state to the mock data array
+         setProducts(mockData);
+      }, 1000);
+   }, []);
+
+   // Define a function to handle the filter change event
+   const handleFilterChange = (event) => {
+      // Get the selected value from the event target
+      const value = event.target.value;
+
+      // Set the filter state to the selected value
+      setFilter(value);
+
+      // Reset the page state to 1
+      setPage(1);
+   };
+
+   // Define a function to handle the sort change event
+   const handleSortChange = (event) => {
+      // Get the selected value from the event target
+      const value = event.target.value;
+
+      // Set the sort state to the selected value
+      setSort(value);
+
+      // Reset the page state to 1
+      setPage(1);
+   };
+
+   // Define a function to handle the page change event
+   const handlePageChange = (event) => {
+      // Get the selected value from the event target
+      const value = event.target.value;
+
+      // Set the page state to the selected value
+      setPage(value);
+   };
+
+   // Define a function to filter the products based on the filter value
+   const filterProducts = () => {
+      // If the filter value is "All", return all products
+      if (filter === "All") {
+         return products;
