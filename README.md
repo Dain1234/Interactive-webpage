@@ -1,4 +1,3 @@
-Sure, I can help you create a readme file with the instructions to run the React.js code that I have given to you. Here is a possible readme file that you can use:
 
 # My React App
 
