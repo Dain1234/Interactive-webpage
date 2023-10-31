@@ -1,0 +1,28 @@
+import React, {useState, useEffect} from 'react';
+import styled from 'styled-components';
+import Product from './Product';
+
+// Define a styled component for the product list container
+const ProductListContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+
+// Define a React component that takes an array of products as props and renders them
+const ProductList = (props) => {
+
+   // Destructure the products array
+   const {products} = props;
+
+   // Return the JSX element
+   return (
+     <ProductListContainer>
+       {products.map(product => (
+         <Product key={product.id} product={product} />
+       ))}
+     </ProductListContainer>
+   );
+};
+
+export default ProductList;
